@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@imtbl/imx-sdk": "^1.8.1",
+    "ethers": "^5.6.1",
+    "fastify": "^3.27.4"
+  }
+}
