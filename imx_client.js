@@ -5,6 +5,7 @@ import {
   ETHTokenType,
   ERC721TokenType,
   ERC20TokenType,
+  formatMessage,
 } from "@imtbl/imx-sdk";
 
 import { BigNumber } from "ethers";
@@ -69,10 +70,28 @@ export class IMXClient {
   }
 
   async transferERC20(request) {
-    // request.sender = this.publicKey;
-    request.quantity = BigNumber.from(request.quantity);
+    const params = {
+      sender_ether_key: this.publicKey,
+      transfer_request: [
+        {
+          token: {
+            type: "ERC20",
+            data: {
+              symbol: request.symbol,
+              decimals: 18,
+              // decimals: BigNumber.from("1000000000000000000"),
+              tokenAddress: request.token_address,
+            },
+          },
+          amount: BigNumber.from(request.amount),
+          receiver: request.to_address,
+        },
+      ],
+    };
 
-    return await this.client.transferV2F(request);
+    // console.log("params.token.data", params.token.data);
+
+    return await this.client.transferV2(params);
   }
 
   async transferERC721(request) {

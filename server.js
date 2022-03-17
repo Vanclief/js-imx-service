@@ -39,7 +39,7 @@ server.get("/register", async (request, reply) => {
 
 server.post("/erc20/transfer", async (request, reply) => {
   try {
-    const response = await client.transferER20(request.body);
+    const response = await client.transferERC20(request.body);
     reply
       .header("Content-Type", "application/json; charset=utf-8")
       .send(response);
