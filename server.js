@@ -15,12 +15,12 @@ server.post("/init", async (request, reply) => {
     const response = await client.init(request.body);
     reply
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ payload: response });
+      .send(response);
   } catch (err) {
     reply
       .code(400)
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ err });
+      .send(err);
   }
 });
 
@@ -29,7 +29,7 @@ server.get("/register", async (request, reply) => {
     const response = await client.register();
     reply
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ payload: response });
+      .send(response);
   } catch (err) {
     reply = err;
   }
@@ -42,13 +42,13 @@ server.post("/erc20/transfer", async (request, reply) => {
     const response = await client.transferER20(request.body);
     reply
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ payload: response });
+      .send(response);
   } catch (err) {
     console.log("err", err);
     reply
       .code(400)
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ err });
+      .send(err);
   }
 });
 
@@ -57,13 +57,13 @@ server.post("/erc721/transfer", async (request, reply) => {
     const response = await client.transferERC721(request.body);
     reply
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ payload: response });
+      .send(response);
   } catch (err) {
     console.log("err", err);
     reply
       .code(400)
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ err });
+      .send(err);
   }
 });
 
@@ -72,12 +72,12 @@ server.post("/erc20/approve", async (request, reply) => {
     const response = await client.approveERC20(request.body);
     reply
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ payload: response });
+      .send(response);
   } catch (err) {
     reply
       .code(400)
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ err });
+      .send(err);
   }
 });
 
@@ -86,12 +86,12 @@ server.post("/erc721/approve", async (request, reply) => {
     const response = await client.approveERC721(request.body);
     reply
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ payload: response });
+      .send(response);
   } catch (err) {
     reply
       .code(400)
       .header("Content-Type", "application/json; charset=utf-8")
-      .send({ err });
+      .send(err);
   }
 });
 

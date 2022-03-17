@@ -76,8 +76,6 @@ export class IMXClient {
   }
 
   async transferERC721(request) {
-    console.log("transferERC721", request);
-
     const params = {
       sender_ether_key: this.publicKey,
       transfer_request: [
@@ -94,8 +92,6 @@ export class IMXClient {
         },
       ],
     };
-
-    console.log("Params", params);
 
     return await this.client.transferV2(params);
   }
