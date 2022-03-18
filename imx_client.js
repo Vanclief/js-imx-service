@@ -8,9 +8,10 @@ import {
   formatMessage,
 } from "@imtbl/imx-sdk";
 
-import { BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { Wallet } from "@ethersproject/wallet";
 import { AlchemyProvider } from "@ethersproject/providers";
+import util from "util";
 
 const networkParams = {
   ropsten: {
@@ -71,32 +72,29 @@ export class IMXClient {
 
   async transferERC20(request) {
     const params = {
-      sender_ether_key: this.publicKey,
-      transfer_request: [
-        {
-          token: {
-            type: "ERC20",
-            data: {
-              symbol: request.symbol,
-              decimals: 18,
-              // decimals: BigNumber.from("1000000000000000000"),
-              tokenAddress: request.token_address,
-            },
-          },
-          amount: BigNumber.from(request.amount),
-          receiver: request.to_address,
+      sender: this.publicKey.toLowerCase(),
+      token: {
+        type: "ERC20",
+        data: {
+          symbol: request.symbol,
+          decimals: 18,
+          tokenAddress: request.token_address.toLowerCase(),
         },
-      ],
+      },
+      quantity: ethers.utils.parseEther(request.amount),
+      receiver: request.to_address.toLowerCase(),
     };
 
-    // console.log("params.token.data", params.token.data);
+    console.log(
+      util.inspect(params, { showHidden: false, depth: null, colors: true })
+    );
 
-    return await this.client.transferV2(params);
+    return await this.client.transfer(params);
   }
 
   async transferERC721(request) {
     const params = {
-      sender_ether_key: this.publicKey,
+      sender_ether_key: this.publicKey.toLowerCase(),
       transfer_request: [
         {
           token: {
@@ -111,6 +109,10 @@ export class IMXClient {
         },
       ],
     };
+
+    console.log(
+      util.inspect(params, { showHidden: false, depth: null, colors: true })
+    );
 
     return await this.client.transferV2(params);
   }
