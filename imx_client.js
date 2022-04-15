@@ -1,17 +1,10 @@
 /** @format */
 
-import {
-  ImmutableXClient,
-  ETHTokenType,
-  ERC721TokenType,
-  ERC20TokenType,
-  formatMessage,
-} from "@imtbl/imx-sdk";
+import { ImmutableXClient } from "@imtbl/imx-sdk";
 
 import { BigNumber, ethers } from "ethers";
 import { Wallet } from "@ethersproject/wallet";
 import { AlchemyProvider } from "@ethersproject/providers";
-import util from "util";
 
 const networkParams = {
   ropsten: {
@@ -71,6 +64,7 @@ export class IMXClient {
   }
 
   async transferERC20(request) {
+    let ethAmount = ethers.utils.formatUnits(request.amount, "ether");
     const params = {
       sender: this.publicKey.toLowerCase(),
       token: {
@@ -81,13 +75,9 @@ export class IMXClient {
           tokenAddress: request.token_address.toLowerCase(),
         },
       },
-      quantity: ethers.utils.parseEther(request.amount),
+      quantity: ethers.utils.parseEther(ethAmount),
       receiver: request.to_address.toLowerCase(),
     };
-
-    console.log(
-      util.inspect(params, { showHidden: false, depth: null, colors: true })
-    );
 
     return await this.client.transfer(params);
   }
@@ -109,10 +99,6 @@ export class IMXClient {
         },
       ],
     };
-
-    console.log(
-      util.inspect(params, { showHidden: false, depth: null, colors: true })
-    );
 
     return await this.client.transferV2(params);
   }
