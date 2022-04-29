@@ -2,13 +2,16 @@
 
 // Require the framework and instantiate it
 import Fastify from "fastify";
-import { IMXClient } from "./imx_client.js";
-// import { ImmutableXClient, ETHTokenType, ERC721TokenType, ERC20TokenType } from '@imtbl/imx-sdk'
 
-// const fastify = require("fastify")({ logger: true });
+// Import the net package for health check
+import net from "net";
+
+// Import IMX Client
+import { IMXClient } from "./imx_client.js";
 
 const server = Fastify({ logger: true });
 const client = new IMXClient();
+const tcpServer = net.createServer();
 
 server.post("/init", async (request, reply) => {
   try {
@@ -98,6 +101,7 @@ server.post("/erc721/approve", async (request, reply) => {
 // Run the server!
 const start = async () => {
   try {
+    await tcpServer.listen(8080);
     await server.listen(4000);
   } catch (err) {
     server.log.error(err);

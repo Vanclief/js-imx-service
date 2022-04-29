@@ -1,8 +1,9 @@
 {
   "type": "module",
   "dependencies": {
+    "@ethersproject/wallet": "^5.6.0",
     "@imtbl/imx-sdk": "^1.8.1",
-    "ethers": "^5.6.1",
+    "ethers": "^5.6.4",
     "fastify": "^3.27.4"
   }
 }
