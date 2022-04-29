@@ -13,6 +13,10 @@ const server = Fastify({ logger: true });
 const client = new IMXClient();
 const tcpServer = net.createServer();
 
+server.get("/", async () => {
+  return { ping: "pong" };
+});
+
 server.post("/init", async (request, reply) => {
   try {
     const response = await client.init(request.body);
