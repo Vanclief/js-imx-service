@@ -101,8 +101,8 @@ server.post("/erc721/approve", async (request, reply) => {
 // Run the server!
 const start = async () => {
   try {
-    await tcpServer.listen(8080);
-    console.log("Health Check TCP Server listening on port 8080");
+    await tcpServer.listen(4001);
+    console.log("Health Check TCP Server listening on port 4001");
     await server.listen(4000);
   } catch (err) {
     server.log.error(err);
