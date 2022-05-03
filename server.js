@@ -107,7 +107,7 @@ const start = async () => {
   try {
     await tcpServer.listen(4001);
     console.log("Health Check TCP Server listening on port 4001");
-    await server.listen(4000);
+    await server.listen(4000, "0.0.0.0");
   } catch (err) {
     server.log.error(err);
     process.exit(1);
