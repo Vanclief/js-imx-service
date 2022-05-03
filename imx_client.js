@@ -1,11 +1,9 @@
 /** @format */
 
-import ImmutableXClient from "@imtbl/imx-sdk";
-
-import Wallet from "@ethersproject/wallet";
-import ethers from "ethers";
-import BigNumber from "ethers";
-import AlchemyProvider from "@ethersproject/providers";
+import { ImmutableXClient } from "@imtbl/imx-sdk";
+import { BigNumber, ethers } from "ethers";
+import { Wallet } from "@ethersproject/wallet";
+import { AlchemyProvider } from "@ethersproject/providers";
 
 const networkParams = {
   ropsten: {
