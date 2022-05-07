@@ -83,6 +83,7 @@ export class IMXClient {
 
   async transferERC721(request) {
     console.log("request", request);
+    console.log("request token?", request?.token_address);
 
     const params = {
       sender_ether_key: this.publicKey.toLowerCase(),
@@ -92,7 +93,7 @@ export class IMXClient {
             type: "ERC721",
             data: {
               tokenId: request.token_id,
-              tokenAddress: request.token_address.toLowerCase(),
+              tokenAddress: request.token_address?.toLowerCase(),
             },
           },
           amount: BigNumber.from(1),
@@ -100,6 +101,8 @@ export class IMXClient {
         },
       ],
     };
+
+    console.log("params", params);
 
     return await this.client.transferV2(params);
   }
