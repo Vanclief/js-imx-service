@@ -65,7 +65,7 @@ export class IMXClient {
   async transferERC20(request) {
     let ethAmount = ethers.utils.formatUnits(request.amount, "ether");
     const params = {
-      sender: this.publicKey.toLowerCase(),
+      sender: this.publicKey.toLowerCase(), // TODO return an error if publicKey doesn't exist
       token: {
         type: "ERC20",
         data: {
@@ -82,11 +82,8 @@ export class IMXClient {
   }
 
   async transferERC721(request) {
-    console.log("request", request);
-    console.log("request token?", request?.token_address);
-
     const params = {
-      sender_ether_key: this.publicKey.toLowerCase(),
+      sender_ether_key: this.publicKey.toLowerCase(), // TODO return an error if publicKey doesn't exist
       transfer_request: [
         {
           token: {
@@ -101,8 +98,6 @@ export class IMXClient {
         },
       ],
     };
-
-    console.log("params", params);
 
     return await this.client.transferV2(params);
   }
