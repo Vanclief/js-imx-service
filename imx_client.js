@@ -90,7 +90,7 @@ export class IMXClient {
             type: "ERC721",
             data: {
               tokenId: request.token_id,
-              tokenAddress: request.token_address,
+              tokenAddress: request.token_address.toLowerCase(),
             },
           },
           amount: BigNumber.from(1),
